@@ -1,0 +1,14 @@
+C:\Users\lglaj\source\repos\busca-gulosa\busca-gulosa\bin\Debug\net7.0\busca-gulosa.exe
+C:\Users\lglaj\source\repos\busca-gulosa\busca-gulosa\bin\Debug\net7.0\busca-gulosa.deps.json
+C:\Users\lglaj\source\repos\busca-gulosa\busca-gulosa\bin\Debug\net7.0\busca-gulosa.runtimeconfig.json
+C:\Users\lglaj\source\repos\busca-gulosa\busca-gulosa\bin\Debug\net7.0\busca-gulosa.dll
+C:\Users\lglaj\source\repos\busca-gulosa\busca-gulosa\bin\Debug\net7.0\busca-gulosa.pdb
+C:\Users\lglaj\source\repos\busca-gulosa\busca-gulosa\obj\Debug\net7.0\busca-gulosa.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lglaj\source\repos\busca-gulosa\busca-gulosa\obj\Debug\net7.0\busca-gulosa.AssemblyInfoInputs.cache
+C:\Users\lglaj\source\repos\busca-gulosa\busca-gulosa\obj\Debug\net7.0\busca-gulosa.AssemblyInfo.cs
+C:\Users\lglaj\source\repos\busca-gulosa\busca-gulosa\obj\Debug\net7.0\busca-gulosa.csproj.CoreCompileInputs.cache
+C:\Users\lglaj\source\repos\busca-gulosa\busca-gulosa\obj\Debug\net7.0\busca-gulosa.dll
+C:\Users\lglaj\source\repos\busca-gulosa\busca-gulosa\obj\Debug\net7.0\refint\busca-gulosa.dll
+C:\Users\lglaj\source\repos\busca-gulosa\busca-gulosa\obj\Debug\net7.0\busca-gulosa.pdb
+C:\Users\lglaj\source\repos\busca-gulosa\busca-gulosa\obj\Debug\net7.0\busca-gulosa.genruntimeconfig.cache
+C:\Users\lglaj\source\repos\busca-gulosa\busca-gulosa\obj\Debug\net7.0\ref\busca-gulosa.dll
