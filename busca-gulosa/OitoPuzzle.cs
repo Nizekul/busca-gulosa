@@ -60,7 +60,6 @@
 
             var listaExpandida = opcoes.No.Expandir();
             opcoes.NosExpandido[ObterStringEstado(opcoes.No.Estado)] = opcoes.No;
-            opcoes.MaxNosExpandidoComprimento = Math.Max(opcoes.MaxNosExpandidoComprimento, opcoes.NosExpandido.Count);
 
             var listaExpandidaNaoExplorada = listaExpandida.Where(no =>
             {
@@ -80,17 +79,6 @@
             }).ToList();
 
             opcoes.ListaFronteira.AddRange(listaExpandidaNaoExplorada);
-            opcoes.MaxListaFronteiraComprimento = Math.Max(opcoes.MaxListaFronteiraComprimento, opcoes.ListaFronteira.Count);
-
-            if (opcoes.ExpandirOtimizacaoCheck)
-            {
-                var noDesejado = listaExpandidaNaoExplorada.FirstOrDefault(noNaoExplorado => noNaoExplorado.Jogo.EstaFinalizado());
-                if (noDesejado != null)
-                {
-                    opcoes.Callback(null, new OpcoesBusca { No = noDesejado });
-                    return;
-                }
-            }
 
             var proximoNo = ObterProximoNo(opcoes);
             if (proximoNo == null)
@@ -119,6 +107,7 @@
         private No ObterProximoNo(OpcoesBusca opcoes)
         {
             var melhorNo = opcoes.ListaFronteira.OrderBy(no => no.Jogo.ObterDistanciaManhattan()).FirstOrDefault();
+
             if (melhorNo != null)
                 opcoes.ListaFronteira.Remove(melhorNo);
             return melhorNo;
@@ -146,6 +135,7 @@
         private int ObterDistanciaManhattan()
         {
             int distancia = 0;
+
             for (int numero = 1; numero <= 8; numero++)
             {
                 int[] posicaoAtual = EncontrarNumero(numero);

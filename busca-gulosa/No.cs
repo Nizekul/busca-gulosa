@@ -11,7 +11,7 @@
         {
             Estado = estado;
             Profundidade = profundidade;
-            Custo = 0; // Ajuste o cálculo do custo conforme necessário
+            Custo = 0;
             Jogo = new OitoPuzzle(estado);
         }
 
@@ -56,7 +56,7 @@
                     // Criar um novo nó para o estado gerado
                     No novoNo = new No(novoEstado, Profundidade + 1)
                     {
-                        Custo = Profundidade + 1 // Para busca gulosa, o custo pode ser a profundidade do nó
+                        Custo = Profundidade + 1
                     };
 
                     nosExpandido.Add(novoNo);
@@ -68,7 +68,6 @@
 
         private bool EhMovimentoValido(int linha, int coluna)
         {
-            // Verifica se a posição está dentro dos limites da matriz
             return linha >= 0 && linha < 3 && coluna >= 0 && coluna < 3;
         }
 
