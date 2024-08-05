@@ -1,4 +1,6 @@
-﻿namespace busca_gulosa
+﻿using System.Collections.Generic;
+
+namespace busca_gulosa
 {
     public class OitoPuzzle
     {
@@ -28,7 +30,7 @@
         public void Resolver()
         {
             int distancia = ObterDistanciaManhattan();
-            Console.WriteLine($"Distância Manhattan: {distancia}");
+            HashSet<string> estadosVisitados = new HashSet<string>();
 
             No noInicial = new No(estadoInicial, 0);
             OpcoesBusca opcoes = new OpcoesBusca
@@ -47,10 +49,10 @@
                 }
             };
 
-            Buscar(opcoes);
+            Buscar(opcoes, estadosVisitados);
         }
 
-        private void Buscar(OpcoesBusca opcoes)
+        private void Buscar(OpcoesBusca opcoes, HashSet<string> estadosVisitados)
         {
             if (opcoes.No.Jogo.EstaFinalizado())
             {
@@ -58,7 +60,7 @@
                 return;
             }
 
-            var listaExpandida = opcoes.No.Expandir();
+            var listaExpandida = opcoes.No.Expandir(estadosVisitados);
             opcoes.NosExpandido[ObterStringEstado(opcoes.No.Estado)] = opcoes.No;
 
             var listaExpandidaNaoExplorada = listaExpandida.Where(no =>
@@ -101,7 +103,7 @@
             ImprimirEstado(proximoNo.Estado);
 
             opcoes.No = proximoNo;
-            Buscar(opcoes);
+            Buscar(opcoes, estadosVisitados);
         }
 
         private No ObterProximoNo(OpcoesBusca opcoes)
@@ -109,7 +111,11 @@
             var melhorNo = opcoes.ListaFronteira.OrderBy(no => no.Jogo.ObterDistanciaManhattan()).FirstOrDefault();
 
             if (melhorNo != null)
+            {
+                melhorNo.Custo = melhorNo.Jogo.ObterDistanciaManhattan();
                 opcoes.ListaFronteira.Remove(melhorNo);
+            }
+
             return melhorNo;
         }
 

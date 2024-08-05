@@ -15,7 +15,7 @@
             Jogo = new OitoPuzzle(estado);
         }
 
-        public List<No> Expandir()
+        public List<No> Expandir(HashSet<string> estadosVisitados)
         {
             List<No> nosExpandido = new List<No>();
             int linhaZero = -1, colunaZero = -1;
@@ -53,13 +53,16 @@
                     novoEstado[linhaZero, colunaZero] = novoEstado[novaLinha, novaColuna];
                     novoEstado[novaLinha, novaColuna] = 0;
 
-                    // Criar um novo nó para o estado gerado
-                    No novoNo = new No(novoEstado, Profundidade + 1)
-                    {
-                        Custo = Profundidade + 1
-                    };
+                    string novoEstadoString = ObterStringRepresentacao(novoEstado);
 
-                    nosExpandido.Add(novoNo);
+                    if (!estadosVisitados.Contains(novoEstadoString))
+                    {
+                        estadosVisitados.Add(novoEstadoString);
+                        // Criar um novo nó para o estado gerado
+                        No novoNo = new No(novoEstado, Profundidade + 1);
+
+                        nosExpandido.Add(novoNo);
+                    }
                 }
             }
 
@@ -69,6 +72,11 @@
         private bool EhMovimentoValido(int linha, int coluna)
         {
             return linha >= 0 && linha < 3 && coluna >= 0 && coluna < 3;
+        }
+
+        private string ObterStringRepresentacao(int[,] estado)
+        {
+            return string.Join(",", estado.Cast<int>());
         }
 
     }
