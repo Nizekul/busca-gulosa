@@ -6,7 +6,7 @@ class OpcoesBusca
     public List<No> ListaFronteira { get; set; } = new List<No>();
     public Dictionary<string, No> NosExpandido { get; set; } = new Dictionary<string, No>();
     public int Iteracao { get; set; } = 0;
-    public int LimiteIteracao { get; set; } = 3300;
+    public int LimiteIteracao { get; set; } = 3000;
     public Action<Exception, OpcoesBusca> Callback { get; set; }
 }
 
@@ -18,9 +18,8 @@ class Program
         int[,] puzzle2 = new int[,] { { 1, 2, 3 }, { 4, 8, 7 }, { 5, 6, 0 } };
         int[,] puzzle3 = new int[,] { { 4, 1, 0 }, { 8, 5, 3 }, { 7, 2, 6 } };
         int[,] puzzle4 = new int[,] { { 7, 2, 6 }, { 1, 5, 0 }, { 4, 8, 3 } };
-        int[,] puzzle5 = new int[,] { { 1, 0, 3 }, { 6, 5, 2 }, { 7, 4, 8 } };
 
-        OitoPuzzle oitoPuzzle = new OitoPuzzle(puzzle5);
+        OitoPuzzle oitoPuzzle = new OitoPuzzle(puzzle4);
         oitoPuzzle.Resolver();
     }
 

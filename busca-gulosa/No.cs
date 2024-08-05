@@ -57,7 +57,6 @@
 
                     if (!estadosVisitados.Contains(novoEstadoString))
                     {
-                        estadosVisitados.Add(novoEstadoString);
                         // Criar um novo nó para o estado gerado
                         No novoNo = new No(novoEstado, Profundidade + 1);
 

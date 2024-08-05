@@ -61,17 +61,14 @@ namespace busca_gulosa
             }
 
             var listaExpandida = opcoes.No.Expandir(estadosVisitados);
-            opcoes.NosExpandido[ObterStringEstado(opcoes.No.Estado)] = opcoes.No;
 
             var listaExpandidaNaoExplorada = listaExpandida.Where(no =>
             {
-                if (opcoes.NosExpandido.TryGetValue(ObterStringEstado(no.Estado), out No noJaExpandido) && noJaExpandido.Custo <= no.Custo)
-                    return false;
-
                 var noAlternativo = opcoes.ListaFronteira.FirstOrDefault(n => ObterStringEstado(n.Estado) == ObterStringEstado(no.Estado));
+
                 if (noAlternativo != null)
                 {
-                    if (noAlternativo.Custo <= no.Custo)
+                    if (noAlternativo.Jogo.ObterDistanciaManhattan() <= no.Jogo.ObterDistanciaManhattan())
                         return false;
                     else
                         opcoes.ListaFronteira.Remove(noAlternativo);
@@ -80,9 +77,15 @@ namespace busca_gulosa
                 return true;
             }).ToList();
 
+            opcoes.ListaFronteira.RemoveAll(no =>
+            {
+                string estadoString = ObterStringRepresentacao(no.Estado);
+                return estadosVisitados.Contains(estadoString);
+            });
+
             opcoes.ListaFronteira.AddRange(listaExpandidaNaoExplorada);
 
-            var proximoNo = ObterProximoNo(opcoes);
+            var proximoNo = ObterProximoNo(opcoes, estadosVisitados);
             if (proximoNo == null)
             {
                 opcoes.Callback(new Exception("Lista fronteira está vazia"), opcoes);
@@ -106,12 +109,14 @@ namespace busca_gulosa
             Buscar(opcoes, estadosVisitados);
         }
 
-        private No ObterProximoNo(OpcoesBusca opcoes)
+        private No ObterProximoNo(OpcoesBusca opcoes, HashSet<string> estadosVisitados)
         {
             var melhorNo = opcoes.ListaFronteira.OrderBy(no => no.Jogo.ObterDistanciaManhattan()).FirstOrDefault();
 
             if (melhorNo != null)
             {
+                string novoEstadoString = ObterStringRepresentacao(melhorNo.Estado);
+                estadosVisitados.Add(novoEstadoString);
                 melhorNo.Custo = melhorNo.Jogo.ObterDistanciaManhattan();
                 opcoes.ListaFronteira.Remove(melhorNo);
             }
@@ -199,6 +204,9 @@ namespace busca_gulosa
             }
         }
 
-
+        private string ObterStringRepresentacao(int[,] estado)
+        {
+            return string.Join(",", estado.Cast<int>());
+        }
     }
 }
