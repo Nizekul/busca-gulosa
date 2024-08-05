@@ -1,3 +1,4 @@
+*.log
 *.swp
 *.*~
 project.lock.json
@@ -41,3 +42,4 @@ bld/
 msbuild.log
 msbuild.err
 msbuild.wrn
+/busca-gulosa/obj
